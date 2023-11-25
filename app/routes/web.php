@@ -18,8 +18,8 @@ use App\Http\Controllers\RegistrationController;
 //   return view('welcome');
 //});
 
-Route::get('/',[DisplayController::class,'index']);
-
+Route::get('/',[DisplayController::class,'index'])->name('home');
+Route::get('event/{id}/detail',[DisplayController::class,'eventdetail'])->name('event.detail');
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');

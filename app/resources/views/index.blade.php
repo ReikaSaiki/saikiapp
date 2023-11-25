@@ -19,7 +19,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html">アプリ名</a>
+                <a class="navbar-brand" href="{{ route('home') }}">アプリ名</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -52,17 +52,21 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
+
+                    @foreach($events as $event)
                     <div class="post-preview">
                     
-                        <a href="post.html">
-                            <h2 class="post-title">イベント名</h2>
+                        <a href="{{ route('event.detail',['id' => $event['id']]) }}">
+                            <h2 class="post-title">
+                            {{ $event['name'] }}
+                        </h2>
                         </a>
                         <p class="post-meta">
-                       開催日時
+                        {{ $event['date'] }}
                         </p>
                   
                     </div>
-                 
+                    @endforeach
                     <hr class="my-4" /><!-- 仕切り線-->
                     
                    
@@ -71,6 +75,9 @@
                 </div>
             </div>
         </div>
+
+        <div class="d-inline-flex p-2"><a class="btn btn-secondary text-uppercase" href="#!">イベント登録</a></div>
+
         <!-- Footer-->
         <footer class="border-top">
             <div class="container px-4 px-lg-5">
