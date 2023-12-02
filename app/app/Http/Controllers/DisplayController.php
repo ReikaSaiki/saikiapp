@@ -8,6 +8,11 @@ use App\Event;
 
 class DisplayController extends Controller
 {
+    // public function index(){
+    //     $auths = Auth::user();
+    //     return view('index',['auths'=> $auths]);
+    // }
+
     public function index(){
         $events = new Event;
         $allevents = $events->all()->toArray();

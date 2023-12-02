@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
+/**ログインしてないユーザーはログインページに飛ばす */
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user();
+        return view('index');
     }
 }
