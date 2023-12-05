@@ -14,14 +14,10 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-//Route::get('/', function () {
-//   return view('welcome');
-//});
-
-Route::get('/', [HomeController::class, 'index']);
-// Route::get('/', 'HomeController@index');
-// Route::get('/',[DisplayController::class,'index']);
-Route::get('event/{id}/detail',[DisplayController::class,'eventdetail'])->name('event.detail');
 Auth::routes();
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/home',[DisplayController::class,'index']);
+Route::get('event/{id}/detail',[DisplayController::class,'eventdetail'])->name('event.detail');
+Route::get('user/{id}/profile',[DisplayController::class,'userprofile'])->name('user.profile');
 
 

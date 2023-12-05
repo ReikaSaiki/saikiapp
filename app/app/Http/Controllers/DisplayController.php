@@ -26,9 +26,16 @@ class DisplayController extends Controller
         $events = new Event;
         $allevents = $events->where('id','=',$eventid)->get()->toArray();
 
-        return view('eventdetail',[
-            'events'=> $allevents,
-        ]);
+        return view('eventdetail',
+        ['events'=> $allevents,]);
+    }
+
+    public function userprofile($userid){
+        $users =  new User;
+        $user = $users->where('id','=',$userid)->get();
+
+        return view('userprofile',
+        ['users'=>$users]);
     }
 
 }

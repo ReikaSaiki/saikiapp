@@ -1,19 +1,84 @@
-@extends('layouts.app2')
-        <!-- Page Header
-        <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>アプリ名</h1>
-                            <span class="subheading">サブタイトル</span>
-                        </div>
+@extends('layouts.app')
+
+@section('content')
+
+
+            <button type="button" class="btn btn-primary form-btn" data-toggle="modal" data-target="#exampleModalCenter">
+                    確認画面へ
+                </button>
+            </div>
+       
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">確認画面</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::open(['route' => 'process', 'method' => 'POST']) !!}
+                            {{ csrf_field() }}
+                            <div class="form-group row">
+                                <p class="col-sm-4 col-form-label">お名前（全角10文字以内）<span class="badge badge-danger ml-1">必須</span></p>
+                                <div class="col-sm-8">
+                                    <p class="modal-name"></p>
+                                    <input class="modal-name" type="hidden" name="name" value="">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <p class="col-sm-4 col-form-label">メールアドレス<span class="badge badge-danger ml-1">必須</span></p>
+                                <div class="col-sm-8">
+                                    <p class="modal-email"></p>
+                                    <input class="modal-email" type="hidden" name="email" value="">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <p class="col-sm-4 col-form-label">電話番号</p>
+                                <div class="col-sm-8">
+                                    <p class="modal-tel"></p>
+                                    <input class="modal-tel" type="hidden" name="tel" value="">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <p class="col-sm-4 col-form-label">性別<span class="badge badge-danger ml-1">必須</span></p>
+                                <div class="col-sm-8">
+                                    <p class="modal-gender"></p>
+                                    <input class="modal-gender" type="hidden" name="gender" value="">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <p class="col-sm-4 col-form-label">選択（複数選択可）<span class="badge badge-danger ml-1">必須</span></p>
+                                <div class="col-sm-8">
+                                    <p class="modal-checkbox"></p>
+                                    <input class="modal-checkbox" type="hidden" name="checkbox" value="">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <p class="col-sm-4 col-form-label">お問い合わせ内容<span class="badge badge-danger ml-1">必須</span></p>
+                                <div class="col-sm-8">
+                                    <p class="modal-contents"></p>
+                                    <input class="modal-contents" type="hidden" name="contents" value="">
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">修正する</button>
+                                {{ Form::submit('送信', ['name' => 'submit', 'class' => 'btn btn-primary']) }}
+                            </div>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
-        </header> -->
+        </div>
 
-@section('content')
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -45,46 +110,4 @@
 
         <div class="d-inline-flex p-2"><a class="btn btn-secondary text-uppercase" href="#!">イベント登録</a></div>
 
-
-        <!-- Footer-->
-        <footer class="border-top">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <ul class="list-inline text-center">
-                            <li class="list-inline-item">
-                                <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="small text-center text-muted fst-italic">Copyright &copy; アプリ名 2023</div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-  
 @endsection

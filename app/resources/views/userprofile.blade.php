@@ -11,15 +11,12 @@
         <article class="mb-4">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
-                    @foreach($events as $event)
+                    @foreach($users as $user)
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <h2 class="section-heading">{{ $event['name'] }}</h2>
-                        <p>日時：{{ $event['date'] }}</p>
-                        <p>内容：{{ $event['contents'] }}</p>
-                        <p>形式：{{ $event['type_flg'] }}</p>
-                        <p>人数：{{ $event['capacity'] }}</p>
-                        <p>参加費：{{ $event['fee'] }}</p>
-                        <p>URL:{{ $event['link'] }}</p>
+                        <h2 class="section-heading">{{ $user['name'] }}</h2>
+                        <p>プロフィール：</p>
+                        <textarea></textarea>
+                        
                     </div>
                     @endforeach
                 </div>
