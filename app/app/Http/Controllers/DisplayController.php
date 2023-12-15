@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Event;
+
+
 
 class DisplayController extends Controller
 {
@@ -30,12 +34,18 @@ class DisplayController extends Controller
         ['events'=> $allevents,]);
     }
 
-    public function userprofile($userid){
-        $users =  new User;
-        $user = $users->where('id','=',$userid)->get();
+    public function userprofile(){
 
-        return view('userprofile',
-        ['users'=>$users]);
+        //userの全情報を抽出
+        Auth::user();
+
+        //userのidをとってくるなら
+        //Auth::id();
+
+        // $users =  new User;
+        // $user = $users->where('id','=',$userid)->get();
+
+        return view('userprofile');
     }
 
 }

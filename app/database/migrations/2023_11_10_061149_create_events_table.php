@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
             $table->datetime('date');
             $table->text('contents');
             $table->boolean('type_flg');
-            $table->string('capacity','255');
+            $table->integer('capacity');
             $table->integer('fee');
             $table->string('link','255');
             $table->timestamps();
