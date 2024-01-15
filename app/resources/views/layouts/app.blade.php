@@ -16,7 +16,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1B1ZsAd3JkD3IMoET19xrsKCRXWyvt7V/u6yp5" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
+    
     <!-- Styles -->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 </head>

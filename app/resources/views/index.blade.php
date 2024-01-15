@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-       
+
        
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
@@ -9,7 +9,11 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
 
+
+                      
                     @foreach($events as $event)
+                    <hr class="my-4" /><!-- 仕切り線-->
+                  
                     <div class="post-preview">
                     
                         <a href="{{ route('event.detail',['id' => $event['id']]) }}">

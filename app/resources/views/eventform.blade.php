@@ -31,7 +31,7 @@
 
                         
                         <p>形式：
-                        <select name="type">
+                        <select name="type_flg">
                         <option value='0'>オフライン</option>
                         <option value='1'>オンライン</option>
                         </select>
@@ -44,7 +44,7 @@
                         <input type ="text" name="fee">円</p>
 
                         <p>URL：
-                        <input type ="url" name="url"></p>
+                        <input type ="url" name="link"></p>
                         
                     </div>
 

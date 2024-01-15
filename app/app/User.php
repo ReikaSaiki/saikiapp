@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','profile_image'
     ];
 
     /**
@@ -49,5 +49,9 @@ class User extends Authenticatable
 
     public function violations(){
         return $this -> hasMany(Violation::class);
+    }
+
+    public function like_events(){
+    return $this->belongsToMany(Event::class, 'likes', 'user_id', 'event_id');
     }
 }
