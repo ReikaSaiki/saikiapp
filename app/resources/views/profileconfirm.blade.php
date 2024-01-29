@@ -25,10 +25,19 @@
                     <div class="card">
                         <div class="card-body">
 
-                        <p>プロフィール画像</p>
-                        <!-- <img src="{{ asset('storage/'.$profile['profile_image']) }}" input type="file" name="profile_image"></p>
-                        -->
-                        <!-- <img src="{{ asset('storage/'.$img) }}" alt="" width="40%" input type="file" name="profile_image"> -->
+                <div class="form-group row">
+                <p class="col-sm-4 col-form-label">プロフィール画像</p>
+                <div class="col-sm-8">
+
+                @if(!empty($profile_image))
+                   <img src="{{ $profile_image }}" name="profile_image" alt="">
+                   @else
+                   <img src="{{ asset('storage/'.$img) }}" name="img" alt="">
+                   @endif
+
+                </div>
+                <input type="hidden" name="newImageName" value="{{ $newImageName }}">
+                </div>
 
                         <p>名前</p>
                         <p name="name">{{ $profile['name'] }} </p>
@@ -40,9 +49,12 @@
                 </div>
  
                <button class="btn btn-primary" type="submit">登録</button>
-               <a class="btn btn-secondary text-uppercase" href="{{ route('profile.edit',['id' => Auth::id()]) }}">戻る</a>
-                
+              
                 </form>
+
+                <button type="button" id="btn--back" class="btn-secondary text-uppercase">戻る</button>
+                <script> const back = document.getElementById('btn--back'); back.addEventListener('click', (e) => { history.back(); return false; }); </script>
+                
                     
                 </div>
             </div>

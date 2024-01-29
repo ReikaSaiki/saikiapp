@@ -21,8 +21,9 @@
 
                 <p>プロフィール画像：</p>
                 <img src="{{ asset('storage/'.Auth::user()->profile_image) }}" alt="プロフィール画像">
+                <!-- {{ method_field('patch') }} -->
                 <input type="file" name="profile_image"></input>
-                           
+
                 <p>名前：</p>
                 <input name="name" value="{{ Auth::user()->name }}"></input>
 
@@ -35,7 +36,7 @@
 
                 <div class="d-grid gap-2 col-6 mx-auto">
                 <button class="btn btn-primary" type="submit">確認画面へ</button>
-                <a class="btn btn-secondary text-uppercase" href="{{ route('index') }}">戻る</a>
+                <a class="btn btn-secondary text-uppercase"  href="{{ route('user.profile',['id' => Auth::id()]) }}">戻る</a>
                 </div>
             </div>
         </article>

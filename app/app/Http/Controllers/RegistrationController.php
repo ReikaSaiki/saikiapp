@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\Event;
 
@@ -66,12 +67,35 @@ class RegistrationController extends Controller
             ]);
     
             $profile = $request->all();
-            // $img = $request->file('profile_image');
 
-            return view('profileconfirm',[
-                'profile'=>$profile,
-                // 'img'=>$img
-            ]);
+            if(isset($request->profile_image)){
+            // 拡張子つきでファイル名を取得
+        $imageName = $request->file('profile_image')->getClientOriginalName();
+
+        // 拡張子のみ
+        $extension = $request->file('profile_image')->getClientOriginalExtension();
+
+        // 新しいファイル名を生成（形式：元のファイル名_ランダムの英数字.拡張子）
+        $newImageName = pathinfo($imageName, PATHINFO_FILENAME) . "_" . uniqid() . "." . $extension;
+
+        $request->file('profile_image')->move(public_path() . "/storage/tmp", $newImageName);
+        $image = "/storage/tmp/" . $newImageName;
+            }
+            else{
+                $image='';
+                $newImageName='';
+            }
+
+            $id=Auth::id();
+            $user=User::find($id);
+            //$user=Auth::user();
+            $img=$user->profile_image;
+
+            return view('profileconfirm',
+                ['profile'=>$profile,
+                'profile_image'=> $image,
+                'newImageName' => $newImageName,
+                'img'=>$img]);
         }
 
 
@@ -81,36 +105,21 @@ class RegistrationController extends Controller
             $id=Auth::id();
             $user=User::find($id);
             //$user=Auth::user();
+
             $user->name= $request->name;
             $user->profile = $request->profile;
 
-            // $file_name = $request->profile_image->getClientOriginalName();
-            // $img = $request->profile_image->storeAs('public', $file_name );
+if(!empty($request->newImageName)){
+            $user->profile_image = $request->newImageName;
+        // 一時保存から本番の格納場所へ移動
+        rename(public_path() . "/storage/tmp/" . $request->newImageName, public_path() . "/storage/"  . $request->newImageName);
+        
+        // 一時保存の画像を削除
+        \File::cleanDirectory(public_path() . "/storage/tmp");
+}
 
-        //     // 画像フォームでリクエストした画像を取得
-        //     $img = $request->file('profile_image');
-        //     // storage > public > img配下に画像が保存される
-        //     $path = $img->store('img','public');
-        //     // 画像情報がセットされていれば、保存処理を実行
-        //     if (isset($img)) {
-        //     // storage > public > img配下に画像が保存される
-        //     $path = $img->store('img','public');
-        //     // store処理が実行できたらDBに保存処理を実行
-        //     if ($path) {
-        //     // DBに登録する処理
-        //     User::create([
-        //         'profile_image' => $path,
-        //     ]);}
-        // }
+        $user->save();
 
-            // $img=$request->profile_image->getClientOriginalName();
-            //  //getClientOriginalNameでオリジナルの名前が取れる。
-            // $img=$request->profile_image->storeAs('',$filename,'public'); 
-            // //storeAsメソッドを追加して引数に上で取得したオリジナル名を入れる
-            // $user->profile_image=$img;
-
-            $user->save();
-    
          return redirect(route('user.profile',$id));
         }
   

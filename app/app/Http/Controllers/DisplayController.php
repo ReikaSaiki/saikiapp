@@ -22,12 +22,20 @@ class DisplayController extends Controller
 
     public function index(){
         $events = new Event;
-        $allevents = $events->all()->toArray();
+        // $allevents = $events->all()->toArray();
+
+        $events = Event::orderBy('date', 'desc')->paginate(5);
 
         return view('index',
-        ['events'=>$allevents]
+        ['events'=>$events],
         );
+        // return view('index',
+        // ['events'=>$allevents],
+        // );
     }
+
+
+
 
     public function eventdetail($eventid){
         $events = new Event;
@@ -43,7 +51,6 @@ class DisplayController extends Controller
     
     public function userprofile(Request $request){
         $user = Auth::user();
-
         $likes = $user->like_events()->get()->toArray();
 
         return view('userprofile',

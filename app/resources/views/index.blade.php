@@ -10,6 +10,8 @@
                     <!-- Post preview-->
 
 
+
+
                       
                     @foreach($events as $event)
                     <hr class="my-4" /><!-- 仕切り線-->
@@ -27,11 +29,14 @@
                   
                     </div>
                     @endforeach
+
                     <hr class="my-4" /><!-- 仕切り線-->
+                    
+                    {{ $events->links() }}
                     
                    
                     <!-- Pager-->
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">次のページへ</a></div>
+  
                 </div>
             </div>
         </div>
