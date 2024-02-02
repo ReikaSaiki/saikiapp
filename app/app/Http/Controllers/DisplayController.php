@@ -20,14 +20,51 @@ class DisplayController extends Controller
     //     return view('index',['auths'=> $auths]);
     // }
 
-    public function index(){
+    public function index(Request $request){
         $events = new Event;
         // $allevents = $events->all()->toArray();
 
-        $events = Event::orderBy('date', 'desc')->paginate(5);
+        $user_id = Auth::id();
+        $from = $request->input('from');
+        $until = $request->input('until');
+
+        //キーワード検索
+        $keyword = $request->input('keyword');
+        $type = $request->input('type');
+ 
+        if (isset($from) && isset($until) && !empty($keyword) &&isset($type)) {
+            $events = $events->where("date", '>',$from)
+            ->where("date", '<', $until)
+            ->where(function ($q) use($keyword) {
+                $q->where('name', 'LIKE', "%{$keyword}%"); 
+                $q->orWhere('contents', 'LIKE', "%{$keyword}%");})
+            ->where('type_flg','=',$type);
+       
+            // $events = $query->orderBy('date', 'desc')->paginate(5);
+        }
+        // 日付検索
+        if (isset($from) && isset($until) ) {
+            $events = $events->whereBetween("date", [$from, $until]);
+            // $events = $query->orderBy('date', 'desc')->paginate(5);
+        }
+        if(!empty($keyword)) {
+           $events = $events->where(function ($q) use($keyword) {
+            $q->where('name', 'LIKE', "%{$keyword}%");
+            $q->orWhere('contents', 'LIKE', "%{$keyword}%");
+        });}
+        if(isset($type)){
+            $events = $events->where('type_flg','=',$type);
+        }
+
+        //全件取得表示、開催日時順
+        $events = $events->orderBy('date', 'desc')->paginate(5);
 
         return view('index',
-        ['events'=>$events],
+        ['events'=>$events,
+        'from'=>$from,
+        'until'=>$until,
+        'keyword'=>$keyword,
+        'type'=>$type]
         );
         // return view('index',
         // ['events'=>$allevents],

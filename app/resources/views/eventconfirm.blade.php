@@ -54,7 +54,8 @@
                     </div>
  
                <button class="btn btn-primary" type="submit">登録</button>
-               <a class="btn btn-secondary text-uppercase" href="{{ route('event.form') }}">戻る</a>
+               <button type="button" id="btn--back" class="btn btn-secondary">戻る</button>
+               <script> const back = document.getElementById('btn--back'); back.addEventListener('click', (e) => { history.back(); return false; }); </script>
                 </form>
                     
                 </div>

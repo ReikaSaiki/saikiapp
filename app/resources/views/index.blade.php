@@ -9,8 +9,48 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
 
+        <div class="search">
+        <form action="{{ route('index') }}" method="GET">
+            @csrf
+            <div>
+                <label for="">キーワード
+                    <input type="text" name="keyword" value="{{ $keyword }}">
+                </label>
+            </div>
 
+            <div>
+            <label for="">日付検索</label>
+            <input type="date" name="from" placeholder="from_date" value="{{ $from }}">
+                <span class="mx-3">~</span>
+            <input type="date" name="until" placeholder="until_date" value="{{ $until }}">
+            </div>
 
+            <div>
+            <label for="">形式</label>
+            <select name="type" value="{{ $type }}">
+                <option value="">未選択</option>
+                <option value='0'>オフライン</option>
+                <option value='1'>オンライン</option>
+            </select>
+            
+            <input type="submit" class="btn btn-primary" value="検索">
+            </div>
+          
+        </form>
+    </div>
+                    
+
+        
+
+    <!-- <form>
+        <div>
+            <label for="">日付検索</label>
+            <input type="date" name="from" placeholder="from_date" value="{{ $from }}">
+                <span class="mx-3">~</span>
+            <input type="date" name="until" placeholder="until_date" value="{{ $until }}">
+            <button type="submit">検索</button>
+        </div>
+    </form> -->
 
                       
                     @foreach($events as $event)

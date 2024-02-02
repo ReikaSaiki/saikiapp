@@ -52,7 +52,7 @@
               
                 </form>
 
-                <button type="button" id="btn--back" class="btn-secondary text-uppercase">戻る</button>
+                <button type="button" id="btn--back" class="btn btn-secondary">戻る</button>
                 <script> const back = document.getElementById('btn--back'); back.addEventListener('click', (e) => { history.back(); return false; }); </script>
                 
                     
